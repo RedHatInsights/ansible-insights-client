@@ -6,9 +6,10 @@ class ActionModule(ActionBase):
 
     def run(self, tmp=None, task_vars=None):
         results = super(ActionModule, self).run(tmp, task_vars)
+        remote_user = task_vars.get('ansible_ssh_user') or self._play_context.remote_user
 
         # copy our egg
-        tmp = self._make_tmp_path()
+        tmp = self._make_tmp_path(remote_user)
         source_full = self._loader.get_real_file("falafel-1.35.0-py2.7.egg")
         tmp_src = self._connection._shell.join_path(tmp, 'insights')
         remote_path = self._transfer_file(source_full, tmp_src)
