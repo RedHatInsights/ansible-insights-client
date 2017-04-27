@@ -1,1 +1,7 @@
 *.pyc
+bin/
+*.egg
+include/
+lib/
+lib64
+pip-selfcheck.json
